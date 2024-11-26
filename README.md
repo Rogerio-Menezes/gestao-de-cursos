@@ -1,21 +1,22 @@
-Gestão de Cursos
-Este projeto é uma aplicação Spring Boot para a gestão de cursos. Ele permite criar, atualizar, consultar e excluir cursos, além de ativar ou desativar cursos. O sistema possui autenticação baseada em Spring Security com JWT (JSON Web Token) e controle de acesso com papéis (roles). Existe uma diferenciação entre os papéis de Admin e User, sendo que o Admin tem permissões para gerenciar cursos, enquanto o User tem permissões limitadas a apenas consultar cursos.
+# Gestão de Cursos
 
-Funcionalidades da API
-A API é baseada no padrão REST e oferece os seguintes endpoints:
+Este projeto é uma aplicação **Spring Boot** para a gestão de cursos. Ele permite criar, atualizar, consultar e excluir cursos, além de ativar ou desativar cursos. O sistema possui autenticação baseada em **Spring Security** com **JWT (JSON Web Token)** e controle de acesso com papéis (roles). Existe uma diferenciação entre os papéis de **Admin** e **User**, sendo que o **Admin** tem permissões para gerenciar cursos, enquanto o **User** tem permissões limitadas a apenas consultar cursos.
 
-1. Criar um Novo Curso
-URL: /course/
-Método: POST
-Descrição: Cria um novo curso (apenas usuários com role de Admin podem acessar).
-Request Body:
-json
-Copiar código
-{
-  "name": "Nome do Curso",
-  "category": "Categoria do Curso",
-  "shift": "Turno do Curso"
-}
+## Funcionalidades da API
+
+A API é baseada no padrão **REST** e oferece os seguintes endpoints:
+
+### 1. Criar um Novo Curso
+- **URL:** `/course/`
+- **Método:** `POST`
+- **Descrição:** Cria um novo curso (apenas usuários com role de **Admin** podem acessar).
+- **Request Body:**
+  ```json
+  {
+    "name": "Nome do Curso",
+    "category": "Categoria do Curso",
+    "shift": "Turno do Curso"
+  }
 Respostas:
 201 Created: Curso criado com sucesso.
 500 Internal Server Error: Erro ao criar o curso.
@@ -31,8 +32,6 @@ URL: /course/{id}
 Método: PUT
 Descrição: Atualiza as informações de um curso existente (apenas usuários com role de Admin podem acessar).
 Request Body:
-json
-Copiar código
 {
   "name": "Nome Atualizado do Curso",
   "category": "Categoria Atualizada do Curso",
@@ -74,8 +73,6 @@ Controle de Acesso: Dependendo do role, as permissões são verificadas:
 Admin pode acessar todas as rotas.
 User só pode acessar rotas que envolvem visualização de cursos.
 Exemplo de Cabeçalho de Autorização:
-text
-Copiar código
 Authorization: Bearer <seu_token_jwt_aqui>
 Tecnologias Usadas
 Spring Boot: Framework para desenvolvimento de aplicações Java.
@@ -87,21 +84,12 @@ JWT (JSON Web Token): Para a autenticação baseada em token.
 Como Rodar o Projeto
 1. Configuração do Banco de Dados
 O projeto utiliza PostgreSQL como banco de dados. Antes de rodar a aplicação, você precisa configurar o banco de dados. No arquivo application.properties, configure a URL, o usuário e a senha do seu banco de dados PostgreSQL:
-
-properties
-Copiar código
 spring.datasource.url=jdbc:postgresql://localhost:5432/seu_banco
 spring.datasource.username=seu_usuario
 spring.datasource.password=sua_senha
 2. Dependências
 Certifique-se de que as dependências necessárias estão no seu pom.xml para o Spring Boot, Spring Security, PostgreSQL, Flyway, JUnit e JWT.
-
 3. Rodar a Aplicação
 Execute o seguinte comando para iniciar a aplicação:
-
-bash
-Copiar código
 mvn spring-boot:run
 A aplicação será executada e estará disponível em http://localhost:8080.
-
-Esse README agora descreve que o sistema possui dois tipos de usuário com permissões distintas: Admin e User, conforme o comportamento do Spring Security configurado no seu código. O Admin tem permissões para gerenciar cursos, enquanto o User tem permissões limitadas à visualização de cursos.
