@@ -1,5 +1,7 @@
-package br.com.rogerio.gestaocursos.course;
+package br.com.rogerio.gestaocursos.domain.course;
 
+import br.com.rogerio.gestaocursos.domain.course.dto.CourseDTO;
+import br.com.rogerio.gestaocursos.domain.course.utils.CourseStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,7 +29,9 @@ public class Course {
 
     private String shift;
 
-    private Boolean active;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 50)
+    private CourseStatus situation;
 
     @CreationTimestamp
     private LocalDateTime created_at;
@@ -39,7 +43,7 @@ public class Course {
         this.name = dto.name();
         this.category = dto.category();
         this.shift = dto.shift();
-        this.active = true;
+        this.situation = CourseStatus.ACTIVE;
 
     }
 
