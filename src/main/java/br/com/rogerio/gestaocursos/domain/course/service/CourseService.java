@@ -1,11 +1,12 @@
-package br.com.rogerio.gestaocursos.course.service;
+package br.com.rogerio.gestaocursos.domain.course.service;
 
 
-import br.com.rogerio.gestaocursos.course.Course;
-import br.com.rogerio.gestaocursos.course.CourseDTO;
-import br.com.rogerio.gestaocursos.course.CourseRepository;
-import br.com.rogerio.gestaocursos.course.DtoCourse;
-import br.com.rogerio.gestaocursos.course.exception.CourseNotFoundException;
+import br.com.rogerio.gestaocursos.domain.course.Course;
+import br.com.rogerio.gestaocursos.domain.course.dto.CourseDTO;
+import br.com.rogerio.gestaocursos.domain.course.repository.CourseRepository;
+import br.com.rogerio.gestaocursos.domain.course.dto.DtoCourse;
+import br.com.rogerio.gestaocursos.domain.course.exception.CourseNotFoundException;
+import br.com.rogerio.gestaocursos.domain.course.utils.CourseStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,18 +46,24 @@ public class CourseService {
         course.setName(courseDTO.name());
         course.setCategory(courseDTO.category());
         course.setShift(courseDTO.shift());
-        course.setActive(courseDTO.active());
+        course.setSituation(courseDTO.situation());
         course.setUpdated_at(LocalDateTime.now());
         this.repository.save(course);
         return ResponseEntity.ok(course);
     }
-    public ResponseEntity<Object> updateCourseActiveStatus(UUID id, boolean active) {
+    public ResponseEntity<Object> updateCourseActiveStatus(UUID id, String situation) {
        Course course = repository.findById(id).orElseThrow(() -> new CourseNotFoundException("Course not found"));
+        try {
+            CourseStatus courseStatus = CourseStatus.valueOf(situation.toUpperCase());
+            course.setSituation(courseStatus);
+            this.repository.save(course);
 
-           course.setActive(active);
-           this.repository.save(course);
-          return ResponseEntity.ok().body(course);
+            return ResponseEntity.ok().body(course);
 
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Invalid CourseStatus value. Accepted values are: ACTIVE, PENDING, CLOSED, CANCELED.");
+        }
 
     }
     public ResponseEntity<Course> getCourseById(UUID id) {
