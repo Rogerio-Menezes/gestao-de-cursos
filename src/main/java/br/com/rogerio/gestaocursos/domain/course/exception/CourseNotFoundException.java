@@ -1,4 +1,4 @@
-package br.com.rogerio.gestaocursos.course.exception;
+package br.com.rogerio.gestaocursos.domain.course.exception;
 
 public class CourseNotFoundException extends RuntimeException {
 
