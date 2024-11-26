@@ -1,4 +1,4 @@
-package br.com.rogerio.gestaocursos.course;
+package br.com.rogerio.gestaocursos.domain.course.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
