@@ -85,6 +85,11 @@ Este projeto utiliza Spring Security para autenticação e autorização de usu�
 - **User:** Pode visualizar os cursos, mas não tem permissão para criar, editar ou excluir cursos.
 #### Fluxo de Autenticação:
 - **Login:** O usuário faz login enviando suas credenciais (email e senha).
+  ```json
+  {
+	  "email": "admin",
+ 	  "password": "admin123"
+  }
 - **Geração de Token:** Se as credenciais forem válidas, a API retorna um JWT que deve ser usado nas próximas requisições.
 - **Validação do Token:** O token é validado em cada requisição subsequente. Dependendo do role (Admin ou User), o acesso é permitido ou negado.
 - **Controle de Acesso:** Dependendo do role, as permissões são verificadas:
