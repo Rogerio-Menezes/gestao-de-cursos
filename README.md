@@ -1,6 +1,6 @@
 # Gestão de Cursos
 
-Este projeto é uma aplicação **Spring Boot** para a gestão de cursos. Ele permite criar, atualizar, consultar e excluir cursos, além de ativar ou desativar cursos. O sistema possui autenticação baseada em **Spring Security** com **JWT (JSON Web Token)** e controle de acesso com papéis (roles). Existe uma diferenciação entre os papéis de **Admin** e **User**, sendo que o **Admin** tem permissões para gerenciar cursos, enquanto o **User** tem permissões limitadas a apenas consultar cursos.
+Este projeto é uma aplicação **Spring Boot** para a gestão de cursos. Ele permite criar, atualizar, consultar e excluir cursos, altera a situação cursos. O sistema possui autenticação baseada em **Spring Security** com **JWT (JSON Web Token)** e controle de acesso com papéis (roles). Existe uma diferenciação entre os papéis de **Admin** e **User**, sendo que o **Admin** tem permissões para gerenciar cursos, enquanto o **User** tem permissões limitadas a apenas consultar cursos.
 
 ## Funcionalidades da API
 
